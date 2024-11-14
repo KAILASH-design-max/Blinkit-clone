@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Grocery</title>
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" alt="Organic" class="logo">
+            <h1>India's last minute </h1>
+        </div>
+        <div class="login-form">
+            <p>Log in or Sign up</p>
+            <input type="text" id="mobile-number" placeholder="+91 Enter mobile number">
+            <button id="continue-btn">Continue</button>
+        </div>
+        <div class="otp-form" style="display: none;">
+            <p>Enter OTP</p>
+            <div class="otp-inputs">
+                <input type="text" class="otp-input" maxlength="1">
+                <input type="text" class="otp-input" maxlength="1">
+                <input type="text" class="otp-input" maxlength="1">
+                <input type="text" class="otp-input" maxlength="1">
+                <input type="text" class="otp-input" maxlength="1">
+                <input type="text" class="otp-input" maxlength="1">
+            </div>
+            <span id="otp-timer">Resend OTP in 2:00</span> <!-- Timer display -->
+            <button id="continue-btn1">Continue</button>
+            <button id="resend-btn" disabled>Resend OTP</button> <!-- Resend OTP button -->
+            <p id="generated-otp" style="display: none;"></p> <!-- Display the generated OTP -->
+        </div>
+        <div class="terms">
+            <p>By continuing, you agree to our <a href="#">Terms of service</a> & <a href="#">Privacy policy</a></p>
+        </div>
+    </div>
+    <script>
+        let otpTimer;
+        let correctOTP;
+
+        document.getElementById('continue-btn').addEventListener('click', function() {
+            const mobileNumber = document.getElementById('mobile-number').value;
+
+            // Generate OTP
+            correctOTP = generateOTP();
+
+            console.log('Sending OTP to', mobileNumber);
+
+            // Show the OTP form and hide the mobile number form
+            document.querySelector('.login-form').style.display = 'none';
+            document.querySelector('.otp-form').style.display = 'block';
+
+            // Display the generated OTP
+            document.getElementById('generated-otp').textContent = `Generated OTP: ${correctOTP}`;
+            document.getElementById('generated-otp').style.display = 'block';
+
+            // Focus the first OTP input box
+            document.querySelector('.otp-input').focus();
+
+            // Start the OTP resend timer
+            startOTPTimer();
+        });
+
+        // Function to generate a random OTP
+        function generateOTP() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Function to move focus to the next input box
+        function moveToNextInput(event) {
+            const currentInput = event.target;
+            if (currentInput.value.length === currentInput.maxLength) {
+                const nextInput = currentInput.nextElementSibling;
+                if (nextInput && nextInput.classList.contains('otp-input')) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        // Function to handle backspace for empty input
+        function handleBackspace(event) {
+            const currentInput = event.target;
+            if (event.key === 'Backspace' && currentInput.value.length === 0) {
+                const previousInput = currentInput.previousElementSibling;
+                if (previousInput && previousInput.classList.contains('otp-input')) {
+                    previousInput.focus();
+                }
+            }
+        }
+
+        // Resend OTP button click event listener
+        document.getElementById('resend-btn').addEventListener('click', function() {
+            // Regenerate OTP
+            correctOTP = generateOTP();
+            console.log('Resending OTP');
+
+            // Reset the timer and start again
+            clearInterval(otpTimer);
+            document.getElementById('otp-timer').textContent = 'Resend OTP in 2:00'; // Reset the timer display
+            startOTPTimer();
+            this.disabled = true; // Disable the resend button
+        });
+
+        // Add event listeners to OTP inputs
+        document.querySelectorAll('.otp-input').forEach(input => {
+            input.addEventListener('input', moveToNextInput);
+            input.addEventListener('keydown', handleBackspace);
+        });
+
+        // Function to start the OTP resend timer
+        function startOTPTimer() {
+            let timeLeft = 120; // 2 minutes in seconds
+
+            // Update the timer every second
+            otpTimer = setInterval(() => {
+                timeLeft--;
+                if (timeLeft >= 0) {
+                    document.getElementById('otp-timer').textContent = `Resend OTP in ${formatTime(timeLeft)}`;
+                } else {
+                    clearInterval(otpTimer);
+                    document.getElementById('otp-timer').textContent = 'Resend OTP'; // Change timer text after time limit
+                    document.getElementById('resend-btn').disabled = false; // Enable the resend button
+                }
+            }, 1000);
+        }
+
+        // Function to format time in mm:ss format
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+
+        document.getElementById('continue-btn1').addEventListener('click', function() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let enteredOTP = '';
+            otpInputs.forEach(input => {
+                enteredOTP += input.value;
+            });
+
+            // Verify the OTP
+            if (enteredOTP === correctOTP) {
+                console.log('OTP verified');
+
+                // Redirect to the main page
+                window.location.href = 'cart.html'; // Change 'blinkit clone.html' to the actual main page URL
+            } else {
+                console.log('Invalid OTP');
+                alert('Invalid OTP. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

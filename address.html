@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Address</title>
+    <link rel="stylesheet" href="adresh.css">
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+</head>
+<body>
+    <main>
+        <!-- Delivery Address Form -->
+        <div class="address-form" id="address-form">
+            <h2>Enter Delivery Address</h2>
+            <form id="delivery-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+    
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+    
+                <label for="address">Address:</label>
+                <textarea id="addressInput" name="address" rows="4" cols="50" required></textarea>
+                
+                <input type="checkbox" id="saveAddress" name="saveAddress">
+                <label for="saveAddress">Save this address for future orders</label>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Payment Form -->
+        <div class="payment-container hidden" id="payment-form-container">
+            <h2>Payment Type</h2>
+            <form id="payment-form">
+                <ul class="payment-options">
+                    <li>
+                        <input type="radio" id="cod" name="payment-type" value="cod" checked>
+                        <label for="cod">Cash On Delivery</label>
+                    </li>
+                </ul>
+                <button type="submit">Place Order</button>
+            </form>
+            <button id="back-to-address" class="back-button">Back</button>
+            <div id="payment-status"></div>
+        </div>
+
+        <!-- Order Confirmation -->
+        <section class="order-confirmation-page hidden" id="order-confirmation-page">
+            <h2>Order Confirmation</h2>
+            <p>Thank you for your order! Your order number is <span id="order-number"></span>.</p>
+            <p>Expected Delivery: <span id="delivery-date"></span></p>
+            <a href="track.html" id="track-order-link">Track Order</a> <!-- Added Track Order Link -->
+        </section>
+
+        <!-- Track Order Page (Hidden by Default) -->
+        <section class="track-order-page hidden" id="track-order-page">
+            <h2>Track Your Order</h2>
+            <p>Enter your order number to track your order:</p>
+            <input type="text" id="order-number-input" placeholder="Enter order number">
+            <button id="track-order-button">Track</button>
+            <div id="track-order-status"></div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('delivery-form');
+            const addressForm = document.getElementById('address-form');
+            const paymentFormContainer = document.getElementById('payment-form-container');
+            const orderConfirmationPage = document.getElementById('order-confirmation-page');
+            const orderNumberSpan = document.getElementById('order-number');
+            const deliveryDateSpan = document.getElementById('delivery-date');
+            const backToAddressButton = document.getElementById('back-to-address');
+            const codRadioButton = document.getElementById('cod');
+            const saveAddressCheckbox = document.getElementById('saveAddress');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('addressInput').value;
+                const saveAddress = saveAddressCheckbox.checked;
+
+                const deliveryDetails = { name, phone, address };
+
+                if (saveAddress) {
+                    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
+                } else {
+                    localStorage.removeItem('deliveryDetails');
+                }
+
+                // Simulating a successful submission
+                setTimeout(() => {
+                    addressForm.classList.add('hidden');
+                    paymentFormContainer.classList.remove('hidden');
+                }, 500); // Delay for demonstration
+            });
+
+            const paymentForm = document.getElementById('payment-form');
+            const paymentStatus = document.getElementById('payment-status');
+
+            paymentForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const selectedPaymentType = document.querySelector('input[name="payment-type"]:checked').value;
+
+                // Simulating a successful order placement
+                setTimeout(() => {
+                    paymentStatus.textContent = 'Order placed. Please pay cash on delivery.';
+                    paymentFormContainer.classList.add('hidden');
+                    orderNumberSpan.textContent = '123456'; // Replace with actual order number
+                    deliveryDateSpan.textContent = 'July 4, 2024'; // Replace with actual delivery date
+                    orderConfirmationPage.classList.remove('hidden');
+                }, 500); // Delay for demonstration
+            });
+
+            backToAddressButton.addEventListener('click', function() {
+                paymentFormContainer.classList.add('hidden');
+                addressForm.classList.remove('hidden');
+            });
+
+            codRadioButton.addEventListener('change', function() {
+                if (codRadioButton.checked) {
+                    const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
+                    if (deliveryDetails) {
+                        document.getElementById('name').value = deliveryDetails.name;
+                        document.getElementById('phone').value = deliveryDetails.phone;
+                        document.getElementById('addressInput').value = deliveryDetails.address;
+                    }
+                }
+            });
+
+            // Track Order Functionality
+            const trackOrderLink = document.getElementById('track-order-link');
+            const trackOrderPageElement = document.getElementById('track-order-page');
+            const trackOrderButton = document.getElementById('track-order-button');
+            const trackOrderStatus = document.getElementById('track-order-status');
+
+            trackOrderLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                orderConfirmationPage.classList.add('hidden');
+                trackOrderPageElement.classList.remove('hidden');
+            });
+
+            trackOrderButton.addEventListener('click', function() {
+                const orderNumber = document.getElementById('order-number-input').value.trim();
+                if (orderNumber === '') {
+                    trackOrderStatus.textContent = 'Please enter an order number.';
+                    return;
+                }
+
+                // Simulating order tracking status
+                setTimeout(() => {
+                    const randomStatus = Math.random() < 0.5 ? 'In Transit' : 'Delivered';
+                    trackOrderStatus.textContent = `Order ${orderNumber}: ${randomStatus}`;
+                }, 500); // Delay for demonstration
+            });
+
+            if (saveAddressCheckbox.checked) {
+                const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
+                if (deliveryDetails) {
+                    document.getElementById('name').value = deliveryDetails.name;
+                    document.getElementById('phone').value = deliveryDetails.phone;
+                    document.getElementById('addressInput').value = deliveryDetails.address;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

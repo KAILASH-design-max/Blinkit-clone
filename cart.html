@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <main>
+        <div class="cart">
+            <h2>My Cart</h2>
+            <div id="start-shopping" class="start-shopping hidden">Start Shopping</div>
+            <div id="cart-item" class="hidden">
+                <div class="cart-item-info">
+                    <p>Delivery in 13 minutes</p>
+                    <p>Shipment of <span id="total-items">0</span> items</p>
+                </div>
+                <div id="cart-items"></div>
+                <div class="bill-details">
+                    <p>Items total <span class="items-total saved-amount-highlight">Saved ₹0</span> <span class="items-price">₹0</span></p>
+                    <p class="delivery-charge-row hidden">Delivery charge <span class="delivery-charge">₹20</span></p>
+                    <p id="discount-option">Apply Coupon
+                        <span class="discount">₹0</span>
+                        <div id="discount-dropdown" class="hidden">
+                            <select id="coupon-select">
+                                <option value="">Select a coupon</option>
+                                <option value="SAVE00">SAVE00 - 0% off</option>
+                                <option value="SAVE05">SAVE05 - 5% off</option>
+                                <option value="SAVE10">SAVE10 - 10% off</option>
+                            </select>
+                        </div>
+                        <p id="coupon-message"></p>
+                    </p>
+                    <p>GST charge <span class="gst-charge">₹0</span></p>
+                    <p>Grand total <span class="grand-total grand-total-highlight">₹0</span></p>
+                </div>
+                <div class="cancellation-policy">
+                    <p>Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.</p>
+                </div>
+                <div class="proceed-to-pay">
+                    <button id="checkout-btn">Proceed to Pay ₹0</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script >
+document.addEventListener('DOMContentLoaded', function() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const startShoppingMessage = document.getElementById('start-shopping');
+    const cartDetails = document.getElementById('cart-item');
+    const deliveryChargeElement = document.querySelector('.delivery-charge');
+    const grandTotalElement = document.querySelector('.grand-total');
+    const itemsPriceElement = document.querySelector('.items-price');
+    const itemsTotalElement = document.querySelector('.items-total');
+    const gstChargeElement = document.querySelector('.gst-charge');
+    const totalItemsElement = document.getElementById('total-items');
+    const deliveryChargeRow = document.querySelector('.delivery-charge-row');
+    const discountElement = document.querySelector('.discount');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const couponMessage = document.getElementById('coupon-message');
+    const discountOptionBtn = document.getElementById('discount-option');
+    const discountDropdown = document.getElementById('discount-dropdown');
+    const couponSelect = document.getElementById('coupon-select');
+
+    const deliveryChargeThreshold = 199;
+    const deliveryChargeAmount = 20;
+    const gstRate = 0.18;
+    const maxFreeDeliveries = 5;
+
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    let freeDeliveries = parseInt(localStorage.getItem('freeDeliveries')) || maxFreeDeliveries;
+    let discount = parseFloat(localStorage.getItem('discount')) || 0;
+    let appliedCoupon = localStorage.getItem('appliedCoupon') || '';
+
+    const validCoupons = {
+        "SAVE00": 0.00,
+        "SAVE05": 0.05,
+        "SAVE10": 0.10
+    };
+
+    function toggleCartVisibility() {
+        if (cartItems.length === 0) {
+            startShoppingMessage.classList.remove('hidden');
+            cartDetails.classList.add('hidden');
+        } else {
+            startShoppingMessage.classList.add('hidden');
+            cartDetails.classList.remove('hidden');
+        }
+    }
+
+    function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+        let totalItems = 0;
+
+        cartItems.forEach(item => {
+            if (item.quantity > 0) {
+                addItemToCart(item);
+                totalPrice += item.price * item.quantity;
+                totalItems += item.quantity;
+            } else {
+                // If item quantity is 0, remove it from the cart
+                removeItemFromCart(item);
+            }
+        });
+
+        updateCartTotal(totalPrice, totalItems);
+        totalItemsElement.textContent = totalItems;
+
+        // After updating, toggle visibility based on cart items
+        toggleCartVisibility();
+    }
+
+    function addItemToCart(item) {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <div class="item-details">
+                <p>${item.name}</p>
+                <div class="item-prices">
+                    <span class="old-price">₹${item.originalPrice}</span>
+                    <span class="new-price">₹${item.price}</span>
+                </div>
+                <div class="quantity">
+                    <button class="decrease-btn">-</button>
+                    <span class="quantity-value">${item.quantity}</span>
+                    <button class="increase-btn">+</button>
+                </div>
+            </div>
+            <img src="${item.image}" alt="${item.name}">
+        `;
+        cartItemsContainer.appendChild(cartItem);
+        const increaseBtn = cartItem.querySelector('.increase-btn');
+        const decreaseBtn = cartItem.querySelector('.decrease-btn');
+
+        increaseBtn.addEventListener('click', () => increaseQuantity(item));
+        decreaseBtn.addEventListener('click', () => decreaseQuantity(item));
+    }
+
+    function increaseQuantity(item) {
+        item.quantity++;
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        renderCart();
+    }
+
+    function decreaseQuantity(item) {
+        item.quantity--;
+        if (item.quantity === 0) {
+            removeItemFromCart(item);
+        } else {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCart();
+        }
+    }
+
+    function removeItemFromCart(item) {
+        const index = cartItems.indexOf(item);
+        if (index !== -1) {
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCart();
+        }
+    }
+
+    function applyDiscount() {
+        discountDropdown.classList.toggle('hidden');
+    }
+
+    function selectCoupon() {
+        const selectedCoupon = couponSelect.value;
+        if (validCoupons[selectedCoupon] !== undefined) {
+            discount = validCoupons[selectedCoupon];
+            appliedCoupon = selectedCoupon;
+            couponMessage.textContent = 'Coupon applied successfully!';
+            couponMessage.style.color = 'green';
+            renderCart();
+        } else {
+            couponMessage.textContent = 'Invalid coupon code!';
+            couponMessage.style.color = 'red';
+        }
+    }
+
+    function updateCartTotal(totalPrice, totalItems) {
+        const originalTotalPrice = cartItems.reduce((total, item) => total + (item.originalPrice * item.quantity), 0);
+        const totalDiscount = totalPrice * discount;
+        const totalSavings = (originalTotalPrice - totalPrice) + totalDiscount;
+
+        itemsPriceElement.textContent = `₹${totalPrice.toFixed(2)}`;
+        itemsTotalElement.textContent = `Saved ₹${totalSavings.toFixed(2)}`;
+        itemsTotalElement.classList.add('saved-amount-highlight');
+
+        const gstCharge = totalPrice * gstRate;
+        gstChargeElement.textContent = `₹${gstCharge.toFixed(2)}`;
+
+        const deliveryCharge = totalPrice >= deliveryChargeThreshold ? 0 : deliveryChargeAmount;
+        deliveryChargeElement.textContent = deliveryCharge === 0 ? 'FREE' : `₹${deliveryCharge}`;
+        deliveryChargeElement.classList.toggle('free-delivery-highlight', deliveryCharge === 0);
+        deliveryChargeRow.classList.remove('hidden');
+
+        discountElement.textContent = `₹${totalDiscount.toFixed(2)}`;
+
+        const grandTotal = totalPrice + gstCharge + deliveryCharge - totalDiscount;
+        grandTotalElement.textContent = `₹${grandTotal.toFixed(2)}`;
+
+        checkoutBtn.textContent = `Proceed to Pay ₹${grandTotal.toFixed(2)}`;
+
+        localStorage.setItem('discount', discount);
+        localStorage.setItem('appliedCoupon', appliedCoupon);
+    }
+
+    checkoutBtn.addEventListener('click', () => {
+        localStorage.setItem('cartDetails', JSON.stringify({
+            cartItems,
+            totalPrice: parseFloat(itemsPriceElement.textContent.replace('₹', '')),
+            grandTotal: parseFloat(grandTotalElement.textContent.replace('₹', '')),
+        }));
+        window.location.href = 'address.html';
+    });
+
+    discountOptionBtn.addEventListener('click', applyDiscount);
+    couponSelect.addEventListener('change', selectCoupon);
+
+    deliveryChargeRow.classList.add('hidden'); // Hide initially
+
+    toggleCartVisibility();
+    renderCart();
+});
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Grocery</title>
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.bing.com/images/blob?bcid=RNAv60RAaDAHZTcnugOgWqXheF6m.....7E" alt="Organic" class="logo">
+            <h1>India's Last Minute Grocery</h1>
+        </div>
+        <!-- Login Form -->
+        <div class="login-form">
+            <p>Log in or Sign up</p>
+            <input type="text" id="mobile-number" placeholder="+91 Enter mobile number" required>
+            <button id="continue-btn">Continue</button>
+        </div>
+
+        <!-- OTP Form (Initially hidden) -->
+        <div class="otp-form" style="display: none;">
+            <p>Enter OTP</p>
+            <div class="otp-inputs">
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+            </div>
+            <span id="otp-timer">Resend OTP in 2:00</span> <!-- Timer display -->
+            <button id="continue-btn1">Continue</button>
+            <button id="resend-btn" disabled>Resend OTP</button> <!-- Resend OTP button -->
+            <p id="generated-otp" style="display: none;"></p> <!-- Display the generated OTP -->
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="terms">
+            <p>By continuing, you agree to our <a href="#">Terms of service</a> & <a href="#">Privacy policy</a></p>
+        </div>
+    </div>
+    <script src="otpController.js"></script>
+</body>
+</html>

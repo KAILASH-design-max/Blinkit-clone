@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> FAQS - Organic  Grocery</title>
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+.faq {
+    margin-bottom: 20px;
+}
+
+.question {
+    background: #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.answer.visible {
+    display: block;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FAQs</h1>
+    </header>
+    <main>
+        <section class="faqs">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq">
+                    <div class="question">
+                        <h3>What is Organic Grocery?</h3>
+                    </div>
+                    <div class="answer">
+                        <p>Organic Grocery is a store dedicated to providing you with the best organic and natural products. We ensure all our products meet the highest standards of quality and sustainability.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <div class="question">
+                        <h3>Are all your products certified organic?</h3>
+                    </div>
+                    <div class="answer">
+                        <p>Yes, all our products are certified organic by recognized certification bodies. We take pride in offering only the best organic products to our customers.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <div class="question">
+                        <h3>Do you offer home delivery?</h3>
+                    </div>
+                    <div class="answer">
+                        <p>Yes, we offer home delivery for your convenience. You can place your order online, and we will deliver it to your doorstep within the stipulated time.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <div class="question">
+                        <h3>What are your store hours?</h3>
+                    </div>
+                    <div class="answer">
+                        <p>Our store is open from 8 AM to 8 PM, Monday to Saturday. We are closed on Sundays and public holidays.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <div class="question">
+                        <h3>How can I contact customer service?</h3>
+                    </div>
+                    <div class="answer">
+                        <p>You can contact our customer service team via email at support@organicgrocery.com or call us at (123) 456-7890. We are here to help you with any queries or issues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Organic Grocery. All rights reserved.</p>
+    </footer>
+    <script>
+    document.querySelectorAll('.faq .question').forEach((question) => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            answer.classList.toggle('visible');
+        });
+    });
+</script>
+</body>
+</html>

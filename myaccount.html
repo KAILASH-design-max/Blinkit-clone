@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilec - Organic Grocery</title>
+    <style>
+        /* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and footer */
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Main content */
+main {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    color: #333;
+}
+
+/* Section styling */
+.user-account-page {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.account-info, .order-history, .saved-addresses {
+    margin-bottom: 20px;
+}
+
+.account-info button, .saved-addresses button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-info button:hover, .saved-addresses button:hover {
+    background-color: #0056b3;
+}
+
+/* Input fields for editing */
+.editable {
+    display: none;
+    margin-top: 10px;
+}
+
+.editable input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.editable button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.editable button:hover {
+    background-color: #218838;
+}
+
+    </style>
+</head>
+<body>
+  <main>
+    <section class="user-account-page">
+        <h2>My Account</h2>v
+        <div class="account-info">
+            <h3>Profile Settings</h3>
+            <p>Name: John Doe</p>
+            <p>Phone Number: +91XXXXXXXXXX</p>
+            <button>Edit Profile</button>
+        </div>
+        <div class="order-history">
+            <h3>Order History</h3>
+            <div class="order">
+                <p>Order #XXXXXX</p>
+                <p>Date: XX/XX/XXXX</p>
+                <p>Status: Delivered</p>
+            </div>
+            <!-- More orders -->
+        </div>
+        <div class="saved-addresses">
+            <h3>Saved Addresses</h3>
+            <p>Address 1</p>
+            <p>Address 2</p>
+            <button>Edit Addresses</button>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Organic Grocery. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+       document.addEventListener('DOMContentLoaded', function () {
+    const editProfileButton = document.querySelector('.account-info button');
+    const editAddressButton = document.querySelector('.saved-addresses button');
+
+    const accountInfo = document.querySelector('.account-info');
+    const savedAddresses = document.querySelector('.saved-addresses');
+
+    editProfileButton.addEventListener('click', function () {
+        toggleEditProfile(accountInfo);
+    });
+
+    editAddressButton.addEventListener('click', function () {
+        toggleEditAddresses(savedAddresses);
+    });
+
+    function toggleEditProfile(container) {
+        const isEditable = container.querySelector('.editable');
+        if (isEditable) {
+            isEditable.remove();
+        } else {
+            const editableDiv = document.createElement('div');
+            editableDiv.className = 'editable';
+            editableDiv.innerHTML = `
+                <input type="text" id="edit-name" value="John Doe" placeholder="Enter your name">
+                <input type="email" id="edit-email" value="john@example.com" placeholder="Enter your email">
+                <button id="save-profile">Save Profile</button>
+            `;
+            container.appendChild(editableDiv);
+
+            document.getElementById('save-profile').addEventListener('click', function () {
+                const name = document.getElementById('edit-name').value;
+                const email = document.getElementById('edit-email').value;
+                container.querySelector('p:nth-of-type(1)').textContent = `Name: ${name}`;
+                container.querySelector('p:nth-of-type(2)').textContent = `Email: ${email}`;
+                editableDiv.remove();
+            });
+        }
+    }
+
+    function toggleEditAddresses(container) {
+        const isEditable = container.querySelector('.editable');
+        if (isEditable) {
+            isEditable.remove();
+        } else {
+            const editableDiv = document.createElement('div');
+            editableDiv.className = 'editable';
+            editableDiv.innerHTML = `
+                <input type="text" id="edit-address1" value="Address 1" placeholder="Enter address 1">
+                <input type="text" id="edit-address2" value="Address 2" placeholder="Enter address 2">
+                <button id="save-addresses">Save Addresses</button>
+            `;
+            container.appendChild(editableDiv);
+
+            document.getElementById('save-addresses').addEventListener('click', function () {
+                const address1 = document.getElementById('edit-address1').value;
+                const address2 = document.getElementById('edit-address2').value;
+                container.querySelector('p:nth-of-type(1)').textContent = address1;
+                container.querySelector('p:nth-of-type(2)').textContent = address2;
+                editableDiv.remove();
+            });
+        }
+    }
+});
+
+    </script>
+</body>
+</html>

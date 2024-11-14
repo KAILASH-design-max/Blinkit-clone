@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organic Grocery</title>
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+    <link rel="stylesheet" href="fresh.css" />
+  </head>
+  <body>
+    <header>
+        <div class="header-container">
+          <div class="header-location">
+            <div class="header-location-title">Delivery in 9 minutes</div>
+            <div class="header-location-desc">Delhi, India</div>
+          </div>
+          <div class="header-search">
+            <input type="text" id="search-input" placeholder='Search Here' />
+          </div>
+          <div class="user-cart">
+            <a href="login.html">Login</a>
+            <a href="cart.html">Cart(<span id="cart-count">0</span>)</a>
+          </div>
+        </div>
+      </header>
+    <main>
+        <aside>
+            <ul class="categories">
+                <li>
+                    <a href="Allfruitveg.html">
+                        <img src="https://freepngimg.com/thumb/vegetable/24584-6-vegetable-image.png" alt="Arrow">
+                        All</a>
+                </li>                
+                  <li>
+                    <a href="fresh.html">
+                    <img src="https://freepngimg.com/thumb/vegetable/1-2-vegetable-free-png-image.png" alt="Arrow" />
+                    Fresh Vegetables
+                </a>
+                  </li>
+                  <li><a href="fruit.html">
+                    <img src="https://freepngimg.com/thumb/fruit/3-2-fruit-picture.png" alt="Arrow" />
+                    Fresh Fruits</a>
+                  </li>
+                  <li>
+                    <img src="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" alt="Arrow" />
+                    Leafies & Herbs
+                  </li>
+                  <li>
+                    <img src="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" alt="Arrow" />
+                    Seasonal
+                  </li>
+                </ul>
+        </aside>
+        <!-- <section class="products"> -->
+            <div id="product-list" class="main-container">
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/onion/10-red-onion-png-image.png" alt="Onion">
+                <h3>Onion (Pyaz)</h3>
+                <p>1 kg</p>
+                <p class="price">₹38 <span>₹48</span></p>
+                <button class="add-to-cart-btn" data-name="Onion" data-image="https://freepngimg.com/thumb/onion/10-red-onion-png-image.png" data-price="38" data-original-price="48">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://cdn.zeptonow.com/production///tr:w-1000,ar-597-403,pr-true,f-auto,q-80/inventory/product/aefc1cee-85fd-4be7-bdbf-23ab5f7abf05-potato-1-kg-product-images-o590000090-p590000090-0-202207291750.jpg" alt="Potato">
+                <h3>Potato (Aloo)</h3>
+                <p>1 kg</p>
+                <p class="price">₹41 <span>₹57</span></p>
+                <button class="add-to-cart-btn" data-name="Potato" data-image="https://cdn.zeptonow.com/production///tr:w-1000,ar-597-403,pr-true,f-auto,q-80/inventory/product/aefc1cee-85fd-4be7-bdbf-23ab5f7abf05-potato-1-kg-product-images-o590000090-p590000090-0-202207291750.jpg" data-price="41" data-original-price="57">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/pepper/32-green-pepper-png-image.png" alt="Green Chilli">
+                <h3>Green Chilli (Hari Mirch)</h3>
+                <p>100 g</p>
+                <p class="price">₹8 <span>₹10</span></p>
+                <button class="add-to-cart-btn" data-name="Green Chilli" data-image="https://freepngimg.com/thumb/pepper/32-green-pepper-png-image.png" data-price="8" data-original-price="10">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/cabbage/11-cabbage-png-image.png" alt="Cabbage">
+                <h3>Cabbage</h3>
+                <p>1 kg</p>
+                <p class="price">₹38 <span>₹48</span></p>
+                <button class="add-to-cart-btn" data-name="Cabbage" data-image="https://freepngimg.com/thumb/cabbage/11-cabbage-png-image.png" data-price="38" data-original-price="48">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/cucumber/11-cucumber-png-image-picture-download.png" alt="Cucumber">
+                <h3>Cucumber</h3>
+                <p>1 kg</p>
+                <p class="price">₹41 <span>₹57</span></p>
+                <button class="add-to-cart-btn" data-name="Cucumber" data-image="https://freepngimg.com/thumb/cucumber/11-cucumber-png-image-picture-download.png" data-price="41" data-original-price="57">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/eggplant/14-eggplant-png-images-download.png" alt="Eggplant">
+                <h3>Eggplant (Baigan)</h3>
+                <p>100 g</p>
+                <p class="price">₹8 <span>₹10</span></p>
+                <button class="add-to-cart-btn" data-name="Eggplant" data-image="https://freepngimg.com/thumb/eggplant/14-eggplant-png-images-download.png" data-price="8" data-original-price="10">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/carrot/1-carrot-png-image.png" alt="Carrot">
+                <h3>Carrot</h3>
+                <p>1 kg</p>
+                <p class="price">₹38 <span>₹48</span></p>
+                <button class="add-to-cart-btn" data-name="Carrot" data-image="https://freepngimg.com/thumb/carrot/1-carrot-png-image.png" data-price="38" data-original-price="48">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/tomato/6-tomato-png-image.png" alt="Tomato">
+                <h3>Tomato</h3>
+                <p>1 kg</p>
+                <p class="price">₹41 <span>₹57</span></p>
+                <button class="add-to-cart-btn" data-name="Tomato" data-image="https://freepngimg.com/thumb/tomato/6-tomato-png-image.png" data-price="41" data-original-price="57">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/pepper/37-red-chili-pepper-png-image.png" alt="Red Chilli">
+                <h3>Red Chilli (Laal Mirch)</h3>
+                <p>100 g</p>
+                <p class="price">₹8 <span>₹10</span></p>
+                <button class="add-to-cart-btn" data-name="Red Chilli" data-image="https://freepngimg.com/thumb/pepper/37-red-chili-pepper-png-image.png" data-price="8" data-original-price="10">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/salad/6-salad-png-image.png" alt="Lettuce">
+                <h3>Lettuce</h3>
+                <p>1 kg</p>
+                <p class="price">₹41 <span>₹57</span></p>
+                <button class="add-to-cart-btn" data-name="Lettuce" data-image="https://freepngimg.com/thumb/salad/6-salad-png-image.png" data-price="41" data-original-price="57">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/ginger/7-ginger-png-image-download.png" alt="Ginger">
+                <h3>Ginger (Adrak)</h3>
+                <p>100 g</p>
+                <p class="price">₹8 <span>₹10</span></p>
+                <button class="add-to-cart-btn" data-name="Ginger" data-image="https://freepngimg.com/thumb/ginger/7-ginger-png-image-download.png" data-price="8" data-original-price="10">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/garlic/6-garlic-png-image.png" alt="Garlic">
+                <h3>Garlic (Lehsun)</h3>
+                <p>1 kg</p>
+                <p class="price">₹38 <span>₹48</span></p>
+                <button class="add-to-cart-btn" data-name="Garlic" data-image="https://freepngimg.com/thumb/garlic/6-garlic-png-image.png" data-price="38" data-original-price="48">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://freepngimg.com/thumb/beetroot/2-beetroot-png-image.png" alt="Beetroot">
+                <h3>Beetroot</h3>
+                <p>1 kg</p>
+                <p class="price">₹41 <span>₹57</span></p>
+                <button class="add-to-cart-btn" data-name="Beetroot" data-image="https://freepngimg.com/thumb/beetroot/2-beetroot-png-image.png" data-price="41" data-original-price="57">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("search-input");
+        const productList = document.getElementById("product-list");
+        const products = productList.getElementsByClassName("product");
+    
+        searchInput.addEventListener("input", function() {
+            const filter = searchInput.value.toLowerCase();
+    
+            Array.from(products).forEach(function(product) {
+                const productName = product.getElementsByTagName("h3")[0].innerText.toLowerCase();
+                if (productName.includes(filter)) {
+                    product.style.display = "";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        const cartCountElement = document.getElementById('cart-count');
+
+        // Initialize cart count from localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        updateCartCount(cartItems);
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const image = this.getAttribute('data-image');
+                const price = parseFloat(this.getAttribute('data-price'));
+                const originalPrice = parseFloat(this.getAttribute('data-original-price'));
+
+                const cartItem = { name, image, price, originalPrice, quantity: 1 };
+
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+                const existingItemIndex = cartItems.findIndex(item => item.name === name);
+                if (existingItemIndex > -1) {
+                    cartItems[existingItemIndex].quantity += 1;
+                } else {
+                    cartItems.push(cartItem);
+                }
+
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartCount(cartItems);
+
+                alert(`${name} has been added to your cart.`);
+            });
+        });
+
+        function updateCartCount(cartItems) {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.innerText = totalItems;
+        }
+    });
+</script>
+</body>
+</html>

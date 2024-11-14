@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+h1 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+
+.login-form p {
+    margin: 0;
+    font-size: 1em;
+    color: #333;
+}
+
+#mobile-number {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    padding-right:0.5px;
+}
+
+#continue-btn {
+    width: 100%;
+    padding: 10px;
+    background-color:green;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#continue-btn:hover {
+    background-color:green;
+}
+#continue-btn1 {
+    width: 100%;
+    padding: 10px;
+    background-color:green;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#continue-btn1:hover {
+    background-color:green;
+}
+/* OTP Form */
+.otp-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.otp-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.otp-input:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.terms {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 20px;
+}
+
+.terms a {
+    color:rgb(167, 15, 15);
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    aside {
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-login {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .search-login {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-login input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+button {
+    padding:10px 12px;
+    color: black;
+    border: none;
+    padding-left:200px;
+    background-color:white
+}

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organic Grocery</title>
+    <link rel="shortcut icon" href="https://www.bing.com/images/blob?bcid=S5Inr2lIvAwHZTcnugOgWqXheF6m.....-4" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            width: 100%;
+            height: 86px;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid rgb(238, 238, 238);
+            background-color: white;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .header-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .header-left {
+            margin-left: 32px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .header-location {
+            margin-left: 32px;
+            margin-right: 100px;
+        }
+
+        .header-location-title {
+            color: rgb(0, 0, 0);
+            font-weight: 800;
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+
+        .header-location-desc {
+            font-size: 13px;
+            color: rgb(0, 0, 0);
+            font-weight: 400;
+        }
+
+        .header-search {
+            flex: 1;
+            height: 46px;
+            cursor: text;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 0px 12px;
+            border-radius: 12px;
+            background: rgb(248, 248, 248);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 70px;
+        }
+
+        .header-search svg {
+            width: 20px;
+            font-weight: 600;
+        }
+
+        .header-search input {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        .header-login {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgb(54, 54, 54);
+            margin-right: 70px;
+        }
+
+        .header-login a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .header-right {
+            width: 112px;
+            height: 52px;
+            background-color: rgb(12, 131, 31);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-right a{
+            text-decoration: none;
+            color: inherit;
+        }
+        .header-right svg {
+            width: 24px;
+            margin-right: 8px;
+        }
+
+        .delivery-info {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        input[type="text"] {
+            margin-left: 20px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .product-page {
+            display: flex;
+            padding: 50px;
+            padding-top: 100px; /* Add padding to avoid touching the header */
+        }
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image img {
+            width: 300px;
+            height: auto;
+        }
+
+        .product-info {
+            margin-left: 50px;
+            max-width: 650px;
+        }
+
+        .price {
+            color: #27ae60;;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .price span {
+            text-decoration: line-through;
+            color: #e74c3c;
+        }
+
+        .add-to-cart-btn{
+            background-color: #f50057;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .about-product,
+        .how-it-works {
+            margin-top: 20px;
+        }
+
+        .how-it-works ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .how-it-works li {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .how-it-works img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .about-product ul,
+        .how-it-works ul {
+            padding-left: 20px;
+        }
+        /* caret button */
+        .caret-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: red;
+        }
+
+        #caret-left {
+            left: -20px; /* Adjusted to avoid overlapping */
+        }
+
+        #caret-right {
+            right: -20px; /* Adjusted to avoid overlapping */
+        }
+
+        #product-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product-item {
+            text-align: center;
+        }
+
+        .product-item img {
+            width: 100px;
+            height: auto;
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .header-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .header-left,
+            .header-location,
+            .header-search,
+            .header-login,
+            .header-right {
+                margin-bottom: 10px;
+                flex: 1 1 100%;
+                text-align: center;
+            }
+
+            .header-search {
+                order: 1;
+            }
+
+            .header-left,
+            .header-right {
+                order: 2;
+            }
+
+            .header-location,
+            .header-login {
+                order: 3;
+            }
+
+            .header-search input {
+                width: 80%;
+            }
+
+            .product-page {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-image img {
+                width: 80%;
+                height: auto;
+            }
+
+            .product-info {
+                width: 80%;
+                padding: 0 20px;
+            }
+
+            .about-product ul,
+            .how-it-works ul {
+                padding-left: 20px;
+            }
+
+            .how-it-works ul li {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .how-it-works ul li img {
+                width: 50px;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header-left,
+            .header-location,
+            .header-search,
+            .header-login,
+            .header-right {
+                margin-bottom: 10px;
+            }
+
+            .header-location {
+                text-align: center;
+            }
+
+            .header-search {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .header-search input {
+                width: 90%;
+            }
+
+            .product-page {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-image img {
+                width: 100%;
+                height: auto;
+            }
+
+            .product-info {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .about-product ul,
+            .how-it-works ul {
+                padding-left: 20px;
+            }
+
+            .how-it-works ul li {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .how-it-works ul li img {
+                width: 50px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <p>Organic Grocery</p>
+            </div>
+            <div class="header-location">
+                <div class="header-location-title">Delivery in 9 minutes</div>
+                <div class="header-location-desc">Delhi, India</div>
+            </div>
+            <div class="header-search">
+                <input type="text" id="search-input" placeholder='Search Here' />
+            </div>
+               <div class="header-login">
+                   <a href="login.html">
+                   Sing Up
+                   </a>
+               </div>
+            <div class="header-right">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+                <a href="cart.html">Cart</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="product-page">
+            <div class="product-image">
+                <button id="caret-left" class="caret-button">&lt;</button>
+                <img id="product-image" src="https://freepngimg.com/thumb/apple/9-apple-png-image.png" alt="Product">
+                <button id="caret-right" class="caret-button">&gt;</button>
+            </div>
+            <div class="product-info" data-name="Organic Apples" data-price="120">
+                <h2>Apple</h2>
+                <p class="price">₹120/1kg <span>₹130/1kg</span></p>
+                <button class="add-to-cart-btn" data-name="Apples" data-image="https://freepngimg.com/thumb/apple/9-apple-png-image.png" data-price="120" data-original-price="130 /1kg">Add to Cart</button>
+                <section class="about-product">
+                    <h3>About Product</h3>
+                    <p id="product-description">Fresh and juicy apples sourced from the best farms. Perfect for a healthy snack or to add to your favorite recipes.</p>
+                    <ul>
+                        <li>Quality Assurance: Each apple undergoes rigorous quality checks to ensure purity and freshness.</li>
+                        <li>Rich Flavor: Experience the rich and authentic flavor that sets our apples apart from the rest.</li>
+                        <li>Nutritional Value: Packed with essential nutrients, our apples offer a healthy and nourishing option for you and your family.</li>
+                        <li>Store in a cool, dry place away from direct sunlight to maintain freshness and flavor.</li>
+                        <li>Once opened, store in the refrigerator and consume within a few days to ensure optimal taste and quality.</li>
+                    </ul>
+                </section>
+                <section class="how-it-works">
+                    <h3>How it Works</h3>
+                    <ul>
+                        <li>
+                            <img src="https://th.bing.com/th/id/OIP._Hpthm72usgFHoC9Wp_itwAAAA?rs=1&pid=ImgDetMain" alt="Open the app">
+                            <p>Choose from over 7000 products across groceries, fresh fruits & veggies, meat, pet care, beauty items & more</p>
+                        </li>
+                        <li>
+                            <img src="https://png.pngtree.com/png-vector/20220820/ourmid/pngtree-transparent-order-now-png-png-image_6117014.png" alt="Place an order">
+                            <p>Add your favorite items to the cart & avail the best offers</p>
+                        </li>
+                        <li>
+                            <img src="https://png.pngtree.com/png-clipart/20201208/big/pngtree-modern-free-delivery-labels-png-image_5511440.png" alt="Get free delivery">
+                            <p>Experience lightning-fast speed & get all your items delivered in 10 minutes</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Array of additional images for the carousel
+            const additionalImages = [
+                'https://freepngimg.com/thumb/apple/9-apple-png-image.png',
+                'https://freepngimg.com/thumb/apple/1-apple-png-image.png',
+                'https://freepngimg.com/thumb/apple/2-apple-png-image.png',
+                'https://freepngimg.com/thumb/apple/9-apple-png-image.png'
+            ];
+            let currentIndex = 0;
+
+            // DOM elements
+            const productImage = document.getElementById('product-image');
+            const caretLeft = document.getElementById('caret-left');
+            const caretRight = document.getElementById('caret-right');
+
+            // Function to update the displayed image
+            function updateImage(index) {
+                productImage.src = additionalImages[index];
+            }
+
+            // Event listener for left caret button
+            caretLeft.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = additionalImages.length - 1;
+                }
+                updateImage(currentIndex);
+            });
+
+            // Event listener for right caret button
+            caretRight.addEventListener('click', () => {
+                if (currentIndex < additionalImages.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateImage(currentIndex);
+            });
+
+            // Functionality for adding items to cart
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            const cartItemsContainer = document.getElementById('cart-items');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    const image = this.getAttribute('data-image');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    const originalPrice = parseFloat(this.getAttribute('data-original-price'));
+
+                    const cartItem = { name, image, price, originalPrice, quantity: 1 };
+
+                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+                    const existingItemIndex = cartItems.findIndex(item => item.name === name);
+                    if (existingItemIndex > -1) {
+                        cartItems[existingItemIndex].quantity += 1;
+                    } else {
+                        cartItems.push(cartItem);
+                    }
+
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+                    alert(`${name} has been added to your cart.`);
+                    renderCart(); // Render cart items after adding
+                });
+            });
+
+            // Function to render cart items
+            function renderCart() {
+                cartItemsContainer.innerHTML = ''; // Clear previous items
+
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+                cartItems.forEach(item => {
+                    addItemToCart(item);
+                });
+            }
+
+            // Function to add item to cart in the DOM
+            function addItemToCart(item) {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <div class="item-details">
+                        <p>${item.name}</p>
+                        <div class="item-prices">
+                            <span class="item-price">₹${item.price.toFixed(2)}</span>
+                            <span class="old-price">₹${item.originalPrice.toFixed(2)}</span>
+                        </div>
+                        <div class="quantity">
+                            <!-- Your quantity buttons -->
+                        </div>
+                    </div>
+                    <img src="${item.image}" alt="${item.name}">
+                `;
+                cartItemsContainer.appendChild(cartItem);
+
+                // Your event listeners for quantity buttons
+            }
+
+            // Initial render when page loads
+            renderCart();
+        });
+    </script>
+</body>
+</html>

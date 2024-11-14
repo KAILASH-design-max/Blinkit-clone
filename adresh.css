@@ -1,0 +1,153 @@
+    /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f4;
+    }
+    
+    /* Main container */
+    main {
+        max-width: 800px;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    /* Address Form Styles */
+    .address-form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .address-form h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    
+    .address-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .address-form .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        text-align: left;
+    }
+    
+    .address-form label {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .address-form input,
+    .address-form textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .address-form textarea {
+        min-height: 100px;
+    }
+    
+    .address-form button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    
+    /* Payment Page Styles */
+    .payment-container {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .payment-container h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .payment-container .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    
+    .payment-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    
+    .payment-container input[type="text"],
+    .payment-container input[type="tel"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+    
+    .payment-container button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    
+    .payment-container #payment-status {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    /* Hidden class */
+    .hidden {
+        display: none;
+    }
+    
+    /* Back button */
+    .back-button {
+        padding: 10px 20px;
+        background-color: #ccc;
+        color: #000;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    
+    .back-button:hover {
+        background-color:#007bff;
+    }
