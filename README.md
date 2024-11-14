@@ -54,14 +54,11 @@ Acknowledgments
 Blinkit for design inspiration.
 HTML, CSS, and JavaScript communities for resources and tutorials.
 
-
-
 https://github.com/user-attachments/assets/35af287a-1978-402e-a104-5e64237ffc67
 
 
 
 
 
-https://github.com/user-attachments/assets/1269a949-9546-434f-a26f-e9f33db212f5
 
 
